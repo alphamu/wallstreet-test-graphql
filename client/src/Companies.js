@@ -1,6 +1,7 @@
 import React from 'react';
 import actions from "./actions";
 import { connect } from 'react-redux'
+import {Cell} from "@blueprintjs/table";
 
 class Companies extends React.Component {
     constructor(props) {
@@ -15,7 +16,13 @@ class Companies extends React.Component {
     }
 
     render() {
-        return <h1>Hello, {this.props.name}</h1>;
+        if (this.props.data) {
+            return this.props.data.companies.map(item => <p>{item.name}</p>)
+        } else {
+            return <h1>Loading</h1>;
+        }
+
+        // return <h1>Hello, {this.props.name}</h1>;
     }
 }
 
