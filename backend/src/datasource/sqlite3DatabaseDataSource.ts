@@ -80,7 +80,6 @@ export class Sqlite3DatabaseSource implements DatabaseDataSource {
                         : '1'
                 } ${sortDirection}
                 `
-                console.debug(sql)
                 sqlite3DatabaseDataSource.all(sql, (err: any, rows: any) => {
                     if (err) reject(err)
                     resolve(rows)
