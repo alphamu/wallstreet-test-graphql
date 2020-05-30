@@ -2,6 +2,8 @@ import React from 'react';
 import actions from "./actions";
 import {connect} from 'react-redux'
 import Company from "./Company";
+import FilterByExchange from "./FilterByExchange";
+import FilterByScore from "./FilterByScore";
 
 class Companies extends React.Component {
     constructor(props) {
@@ -56,11 +58,22 @@ class Companies extends React.Component {
         let next = {
             sortBy: undefined,
             sortDirection: undefined,
-            filterByField: undefined,
-            filterByValues: undefined,
             ...nextState
         }
         this.setState(next)
+    }
+
+    childUpdateState(childState) {
+        let next = {
+            ...this.state,
+            ...childState
+        }
+        if (next.filterByValues.length === 0) {
+            next.filterByField = undefined
+            next.filterByValues = undefined
+        }
+        console.log("Child update to", next)
+        this.setState(next, () => this.props.fetchCompanies(next))
     }
 
     render() {
@@ -68,46 +81,29 @@ class Companies extends React.Component {
             let companies = this.props.data.companies
             let exchange_symbols = this.props.data.exchange_symbols
             let unique_scores = this.props.data.unique_scores
-            console.log(this.props.data)
             return (
                 <div>
                     <div>
-                        {
-                            exchange_symbols.map(({exchange_symbol}) => {
-                                    return (
-                                        <div>
-                                            <input type={'checkbox'} id={exchange_symbol} name={exchange_symbol}
-                                                   value={exchange_symbol}/>
-                                            <label htmlFor={exchange_symbol}>{exchange_symbol}</label>
-                                        </div>
-                                    )
-                                }
-                            )
-                        }
+                        <FilterByExchange filters={exchange_symbols} update={this.childUpdateState.bind(this)} parentState={this.state}/>
                     </div>
                     <div>
-                        {
-                            unique_scores.map(({score}) => {
-                                    return (
-                                        <div>
-                                            <input type={'checkbox'} id={score} name={score}
-                                                   value={score}/>
-                                            <label htmlFor={score}>{score}</label>
-                                        </div>
-                                    )
-                                }
-                            )
-                        }
+                        <FilterByScore filters={unique_scores}  update={this.childUpdateState.bind(this)} parentState={this.state} />
                     </div>
-                    <table>
+                    <table className={'companyTable'}>
                         <thead>
                         <tr>
-                            {this.titles.map(t => <th id={t} key={t}
-                                                      onClick={this.handleClickTitle.bind(this)}>{t.toUpperCase()}</th>)}
+                            {this.titles.map(t => {
+                                return (<th
+                                    id={t}
+                                    key={t}
+                                    className={(t === 'score' || t === 'volatile_score') ? `sortHeader ${t}` : ''}
+                                    onClick={this.handleClickTitle.bind(this)}>{t.replace('_', ' ')}
+                                </th>)
+                            })}
                         </tr>
                         </thead>
                         <tbody>
-                        <Company companies={companies} titles={this.titles}/>
+                            <Company companies={companies} titles={this.titles}/>
                         </tbody>
                     </table>
                 </div>

@@ -33,9 +33,8 @@ const COMPANIES = gql`
 
 function* fetchCompanies({sortBy, sortDirection, filterByField, filterByValues}) {
     try {
-        console.log({sortBy, sortDirection, filterByField, filterByValues})
+        console.log("saga got", {sortBy, sortDirection, filterByField, filterByValues})
         const response = yield client.query({query: COMPANIES, variables: {sortBy, sortDirection, filterByField, filterByValues }})
-        console.log("saga fetchCompanies", response)
         yield put({type: actions.FETCH_COMPANIES_SUCCESS, response: response});
     } catch (e) {
         yield put({type: actions.FETCH_COMPANIES_FAIL, message: e.message});

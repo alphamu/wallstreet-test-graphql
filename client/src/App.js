@@ -1,12 +1,13 @@
 import React from 'react';
 
 import Companies from "./Companies";
+import './App.css'
 
 const App = () => {
 
     return (
-            <div>
-                <h2>Wall St.</h2>
+            <div className={'App'}>
+                <h1>Wall St.</h1>
                 <Companies />
             </div>
 

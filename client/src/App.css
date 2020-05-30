@@ -1,10 +1,61 @@
+body {
+
+}
+
 .App {
-  text-align: center;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.companyTable {
+  margin-top: 50px;
+}
+
+table {
+  border: 2px solid #FFFFFF;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+table td, table th {
+  border: 1px solid #FFFFFF;
+  padding: 8px 8px;
+}
+table tbody td {
+  font-size: 13px;
+}
+table td:nth-child(even) {
+  background: #EBEBEB;
+}
+table thead {
+  text-transform: capitalize;
+  background: #FFFFFF;
+  border-bottom: 4px solid #333333;
+}
+table thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #333333;
+  text-align: center;
+  border-left: 2px solid #333333;
+}
+table thead th:first-child {
+  border-left: none;
+}
+
+table tfoot {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333333;
+  border-top: 4px solid #333333;
+}
+table tfoot td {
+  font-size: 14px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -26,6 +77,27 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.sortHeader {
+  cursor: pointer;
+}
+.sortHeader:hover {
+  color: blue;
+}
+
+.filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.filter div {
+  width: 130px
+}
+
+.filter div input[type=checkbox] {
+  margin-right: 10px;
 }
 
 @keyframes App-logo-spin {
