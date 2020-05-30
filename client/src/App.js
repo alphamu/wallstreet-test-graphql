@@ -1,26 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Cell} from "@blueprintjs/table";
+import {gql} from "apollo-boost";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "normalize.css"
+import "@blueprintjs/core/lib/css/blueprint.css"
+import "@blueprintjs/icons/lib/css/blueprint-icons.css"
+import "@blueprintjs/table/lib/css/table.css"
+import Companies from "./Companies";
+
+
+const App = () => {
+
+    return (
+            <div>
+                <h2>My first Apollo app 🚀</h2>
+                <Companies />
+            </div>
+
+    )
 }
 
 export default App;
