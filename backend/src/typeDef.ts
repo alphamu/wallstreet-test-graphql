@@ -110,6 +110,14 @@ export const typeDefs = gql`
     total: Int
     sentence: String
   }
+  
+  type ExchangeSymbol {
+    exchange_symbol: String
+  }
+
+  type UniqueScores {
+    score: String
+  }
 
   type Query {
     companies(
@@ -118,5 +126,7 @@ export const typeDefs = gql`
       filterByField: String
       filterByValues: [String]
     ): [CompaniesSortedFiltered]
+    exchange_symbols: [ExchangeSymbol]
+    unique_scores: [UniqueScores]
   }
 `

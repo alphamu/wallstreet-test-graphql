@@ -1,11 +1,17 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import {put, takeLatest} from 'redux-saga/effects'
 import {gql} from "apollo-boost";
 import actions from './actions'
-import {useApolloClient} from "@apollo/react-hooks";
 import client from "./apollo-proxy";
+
 const COMPANIES = gql`
-    {
-        companies {
+    query ($sortBy: String, $sortDirection: String, $filterByField: String, $filterByValues: [String]){
+        unique_scores {
+            score
+        }
+        exchange_symbols {
+            exchange_symbol
+        }
+        companies(sortBy: $sortBy, sortDirection: $sortDirection, filterByField: $filterByField, filterByValues: $filterByValues) {
             company_id
             name
             score
@@ -25,11 +31,10 @@ const COMPANIES = gql`
     }
 `;
 
-function* fetchCompanies(params) {
+function* fetchCompanies({sortBy, sortDirection, filterByField, filterByValues}) {
     try {
-        //useQuery(COMPANIES)
-        // const res = yield useQuery(COMPANIES)
-        const response = yield client.query({query: COMPANIES})
+        console.log({sortBy, sortDirection, filterByField, filterByValues})
+        const response = yield client.query({query: COMPANIES, variables: {sortBy, sortDirection, filterByField, filterByValues }})
         console.log("saga fetchCompanies", response)
         yield put({type: actions.FETCH_COMPANIES_SUCCESS, response: response});
     } catch (e) {

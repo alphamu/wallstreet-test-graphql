@@ -18,5 +18,7 @@ export interface DatabaseDataSource extends DataSource {
                                   sortDirection: string,
                                   filterByField: string,
                                   filterByValues: string[]): Promise<any[]>
+    getUniqueExchangeSymbols(): Promise<any[]>
 
+    getUniqueScores(): Promise<any[]>
 }

@@ -2,6 +2,12 @@ import {strIsEmpty, strIsNotEmpty} from './utils';
 
 export default {
     Query: {
+        unique_scores:(_source: any, args: any, context: any) => {
+            return context.dataSources.db.getUniqueScores()
+        },
+        exchange_symbols : (_source: any, args: any, context: any) => {
+          return context.dataSources.db.getUniqueExchangeSymbols()
+        },
         companies: (_source: any, args: any, context: any) => {
             const { sortBy, sortDirection, filterByField, filterByValues } = args
             if (strIsNotEmpty(sortBy) && !['volatile', 'score'].includes(sortBy)) {

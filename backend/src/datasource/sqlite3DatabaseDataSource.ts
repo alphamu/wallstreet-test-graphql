@@ -105,4 +105,29 @@ export class Sqlite3DatabaseSource implements DatabaseDataSource {
             })
         })
     }
+
+    getUniqueExchangeSymbols(): Promise<any[]> {
+        return new Promise((resolve, reject) => {
+            sqlite3DatabaseDataSource.serialize(() => {
+                sqlite3DatabaseDataSource.all('SELECT DISTINCT(exchange_symbol) as exchange_symbol FROM swsCompany ORDER BY 1', (err: any, rows: any) => {
+                    if (err) reject(err)
+                    resolve(rows)
+                })
+            })
+        })
+    }
+
+    getUniqueScores(): Promise<any[]> {
+        return new Promise((resolve, reject) => {
+            sqlite3DatabaseDataSource.serialize(() => {
+                sqlite3DatabaseDataSource.all('SELECT DISTINCT(s.total) AS score ' +
+                    'FROM swsCompany c ' +
+                    'INNER JOIN swsCompanyScore s ON c.id = s.company_id ' +
+                    'ORDER BY 1', (err: any, rows: any) => {
+                    if (err) reject(err)
+                    resolve(rows)
+                })
+            })
+        })
+    }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {createStore, applyMiddleware, combineReducers} from 'redux'
+import {applyMiddleware, createStore} from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import {Provider} from 'react-redux'
 import reducer from './reducers'
