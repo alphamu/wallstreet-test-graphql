@@ -1,9 +1,8 @@
 import {strIsEmpty, strIsNotEmpty} from './utils';
-import db from './db';
 
 export default {
     Query: {
-        companies: (obj: any, args: any) => {
+        companies: (_source: any, args: any, context: any) => {
             const { sortBy, sortDirection, filterByField, filterByValues } = args
             if (strIsNotEmpty(sortBy) && !['volatile', 'score'].includes(sortBy)) {
                 throw new Error(`Valid values for sortBy are ${['volatile', 'score']}`)
@@ -38,7 +37,7 @@ export default {
                     'filterByField must be defined and filterByValues must contain at least 1 element in an array'
                 )
             }
-            return db.getCompaniesSortedAndFiltered(
+            return context.dataSources.db.getCompaniesSortedAndFiltered(
                 sortBy,
                 sortDirection,
                 filterByField,

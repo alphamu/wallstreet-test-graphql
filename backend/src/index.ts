@@ -4,15 +4,18 @@ import {typeDefs} from './typeDef'
 import schemaDirectives from './schemaDirectives'
 import logger from './logger'
 import resolvers from "./resolvers";
+import {Sqlite3DatabaseSource} from "./datasource/sqlite3DatabaseDataSource";
 
 const app = express()
-
 
 const server = new ApolloServer({
     typeDefs,
     resolvers,
     schemaDirectives,
     logger,
+    dataSources: () => ({
+        db: new Sqlite3DatabaseSource()
+    })
 })
 server.applyMiddleware({
     app,

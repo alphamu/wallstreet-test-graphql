@@ -6,7 +6,6 @@ import {
   GraphQLString,
 } from 'graphql'
 import formatDate from 'dateformat'
-import db from './db'
 import { log4directives as log } from './logger'
 
 class DateFormatDirective extends SchemaDirectiveVisitor {
@@ -34,8 +33,8 @@ class DateFormatDirective extends SchemaDirectiveVisitor {
 
 class AllFromDatabaseDirective extends SchemaDirectiveVisitor {
   visitFieldDefinition(field: GraphQLField<any, any>) {
-    field.resolve = async (source) => {
-      return db.getAllFromTable(
+    field.resolve = async (source, args, context) => {
+      return context.dataSources.db.getAllFromTable(
         this.args.table,
         this.args.column,
         source.company_id || source.id,
@@ -47,8 +46,8 @@ class AllFromDatabaseDirective extends SchemaDirectiveVisitor {
 
 class LatestFromDatabaseDirective extends SchemaDirectiveVisitor {
   visitFieldDefinition(field: GraphQLField<any, any>) {
-    field.resolve = async (source) => {
-      return db.getLatestFromTable(
+    field.resolve = async (source, args, context) => {
+      return context.dataSources.db.getLatestFromTable(
         this.args.table,
         this.args.column,
         source.company_id || source.id,
@@ -60,7 +59,7 @@ class LatestFromDatabaseDirective extends SchemaDirectiveVisitor {
 
 class FilteredAndSortedDatabaseDirective extends SchemaDirectiveVisitor {
   visitFieldDefinition(field: GraphQLField<any, any>) {
-    field.resolve = async (source) => {
+    field.resolve = async (source, params, context) => {
       log.debug(
         'FilteredAndSortedDatabaseDirective',
         this.args.sortedBy,
@@ -68,7 +67,7 @@ class FilteredAndSortedDatabaseDirective extends SchemaDirectiveVisitor {
         this.args.filterByField,
         this.args.filterByValues
       )
-      return db.getCompaniesSortedAndFiltered(
+      return context.dataSources.db.getCompaniesSortedAndFiltered(
         this.args.sortedBy,
         this.args.sortDirection,
         this.args.filterByField,

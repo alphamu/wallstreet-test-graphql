@@ -27,6 +27,7 @@
     "@types/mysql": "^2.15.13",
     "@types/node-fetch": "^2.5.7",
     "@types/sqlite3": "^3.1.6",
+    "apollo-datasource": "^0.7.1",
     "apollo-server": "^2.14.1",
     "apollo-server-express": "^2.14.1",
     "babel-cli": "^6.26.0",

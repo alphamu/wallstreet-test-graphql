@@ -9,7 +9,7 @@ class Companies extends React.Component {
         console.log(props)
         this.state = {
             data: undefined,
-            loading: undefined,
+            loading: true,
             error: undefined
         };
         props.fetchCompanies()
@@ -19,10 +19,8 @@ class Companies extends React.Component {
         if (this.props.data) {
             return this.props.data.companies.map(item => <p>{item.name}</p>)
         } else {
-            return <h1>Loading</h1>;
+            return <h1>Loading...</h1>;
         }
-
-        // return <h1>Hello, {this.props.name}</h1>;
     }
 }
 
