@@ -26,11 +26,11 @@ it('should be 2 companies', async () => {
     expect(res.data).toBeDefined()
     expect(res.data.companies).toBeDefined()
     expect(res.data.companies.length).toBe(2)
-    //validate values
-    //validate ids
+    // validate values
+    // validate ids
     expect(res.data.companies[0].company_id).toBe('1')
     expect(res.data.companies[1].company_id).toBe('2')
-    //validate names
+    // validate names
     expect(res.data.companies[0].name).toBe('CompanyA')
     expect(res.data.companies[1].name).toBe('CompanyB')
 

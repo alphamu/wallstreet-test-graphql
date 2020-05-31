@@ -23,9 +23,31 @@ naming convention as is the default for react apps.
 
 ## Running
 
-In order to run the project, you can either build the react app and run 
-it through the backend express server (already configured),
-or you can run the react app and the backend separately.
+In order to run the project, you can either:
+- Build and run the docker container
+- build the react app and run it through the backend express server
+- Or, you can run the react app and the backend separately.
+
+### To build and run in docker
+
+```bash
+docker build -t <your username>/wallstreet-test .
+docker run -p 5000:5000 -d <your username>/wallstreet-test
+
+# Ensure docker container is running, if it is, you'll need the CONTAINER ID
+docker ps
+
+# Check docker logs to make sure service is ready on http://localhost:5000
+docker logs <container id>
+```
+
+If you see output like the one shown, you should be able to visit http://localhost:5000 and see everything work:
+```
+[0000-00-00T00:00:00.000] [INFO] default - 🚀  Server ready at http://localhost:5000
+ Query GraphQL on http://localhost:5000/graphql
+```
+
+
 
 ### To run everything under express:
 

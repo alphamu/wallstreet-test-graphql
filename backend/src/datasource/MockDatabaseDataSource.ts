@@ -25,7 +25,7 @@ export class MockDatabaseSource implements DatabaseDataSource {
     orderBy: string
   ): Promise<any[]> {
     return new Promise((resolve, reject) => {
-      resolve([]) //not really used, so not mocked
+      resolve([]) // not really used, so not mocked
     })
   }
 
@@ -68,7 +68,7 @@ export class MockDatabaseSource implements DatabaseDataSource {
     orderBy: string
   ): Promise<any> {
     return new Promise((resolve, reject) => {
-      resolve({}) //not really used, so not mocked
+      resolve({}) // not really used, so not mocked
     })
   }
 
