@@ -1,6 +1,6 @@
 import sqlite3 from 'sqlite3'
 import formatDate from 'dateformat'
-import {DatabaseDataSource} from '../src/datasource/databaseDataSource'
+import {DatabaseDataSource} from './databaseDataSource'
 import {DataSourceConfig} from 'apollo-datasource'
 
 const verboseSqlite3 = sqlite3.verbose()
