@@ -8,7 +8,7 @@ const {createTestClient} = require('apollo-server-testing')
 
 let server:ApolloServer
 
-beforeEach(()=> {
+beforeAll(()=> {
     server = new ApolloServer({
         typeDefs,
         resolvers,
@@ -16,7 +16,7 @@ beforeEach(()=> {
     })
 }, 1000)
 
-afterEach(() => {
+afterAll(() => {
     return server.stop()
 })
 

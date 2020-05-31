@@ -1,7 +1,7 @@
 import React from 'react'
 import {render} from '@testing-library/react'
 import {Provider} from 'react-redux'
-import App from './App'
+import Companies from './Companies'
 import '@testing-library/jest-dom'
 
 import configureStore from 'redux-mock-store'
@@ -61,25 +61,30 @@ let storeData = {
 let emptyStoreData = {}
 
 beforeEach(() => {
-    store = mockStore(emptyStoreData);
+    store = mockStore(storeData);
     store.dispatch = jest.fn();
     app = render(
         <Provider store={store}>
-            <App />
+            <Companies />
         </Provider>
     )
 
 });
 
-test('Is Title Wall St.', () => {
-    const { getByText } = app
-    const textElement = getByText(/Wall St\./i)
+test('Exchange title showing.', () => {
+    const {getByText} = app
+    const textElement = getByText('Filter by Exchange Symbol')
     expect(textElement).toBeInTheDocument()
 });
 
-test('Is Companies Loading.', () => {
-    const { getByText } = app
-    const textElement = getByText(/Loading\.\.\./i)
+test('Score title showing.', () => {
+    const {getByText} = app
+    const textElement = getByText('Filter by Exchange Symbol')
     expect(textElement).toBeInTheDocument()
-    expect(store.dispatch).toHaveBeenCalled()
+});
+
+test('Are companies listed.', () => {
+    const {getByText} = app
+    const textElement = getByText('Telstra')
+    expect(textElement).toBeInTheDocument()
 });
