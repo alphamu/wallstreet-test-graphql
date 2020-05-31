@@ -25,8 +25,8 @@ naming convention as is the default for react apps.
 
 In order to run the project, you can either:
 - Build and run the docker container
-- build the react app and run it through the backend express server
-- Or, you can run the react app and the backend separately.
+- build the React app and run it through the backend express server
+- Or, you can run the React app and the backend separately.
 
 ### To build and run in docker
 
@@ -47,7 +47,10 @@ If you see output like the one shown, you should be able to visit http://localho
  Query GraphQL on http://localhost:5000/graphql
 ```
 
-
+When you're done, you probably want to stop the docker container:
+```bash
+docker stop <container id>
+```
 
 ### To run everything under express:
 
