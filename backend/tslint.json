@@ -6,7 +6,10 @@
   "jsRules": {},
   "rules": {
     "trailing-comma": [ false ],
-    "max-classes-per-file": ["warn", 5]
+    "max-classes-per-file": ["warn", 5],
+    "quotes": [2, "single", "avoid-escape"],
+    "semicolon": [true, "never"],
+    "no-var-requires" : false
   },
   "rulesDirectory": []
 }

@@ -33,6 +33,6 @@ app.use(express.static('../client/build'))
 
 app.listen(parseInt(process.env.SERVICE_PORT || '5000', 10), () =>
   logger.info(
-    '🚀  Server ready at http://localhost:5000\n Query GraphQL on http://localhost:5000/graphql'
+    "🚀  Server ready at http://localhost:5000\n Query GraphQL on http://localhost:5000/graphql"
   )
 )

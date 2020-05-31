@@ -14,8 +14,8 @@
     "start": "node .",
     "start:dev": "nodemon",
     "test": "jest",
-    "lint": "eslint -c .eslintrc.js '{src, test}/**/*.{js,ts,tsx}' --quiet",
-    "lint:fix": "eslint -c .eslintrc.js '{src, test}/**/*.{js,ts,tsx}' --quiet --fix"
+    "lint": "tslint -c tslint.json -p tsconfig.json --quiet",
+    "lint:fix": "tslint -c tslint.json -p tsconfig.json --quiet --fix"
   },
   "keywords": [],
   "author": "Ali Muzaffar",

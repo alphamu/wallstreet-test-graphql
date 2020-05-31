@@ -13,12 +13,14 @@
     "baseUrl": ".",
     "paths": {
       "*": [
-        "node_modules/*"
+        "node_modules/*",
+        "dist/*"
       ]
     }
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "__tests__/**/*"
   ],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }
