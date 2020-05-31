@@ -1,6 +1,6 @@
 import { DataSource, DataSourceConfig } from 'apollo-datasource'
-import {SnowflakeScore} from "./SnowflakeScore"
-import {ExchangeSymbol} from "./ExchangeSymbol"
+import {SnowflakeScore} from "./resp/SnowflakeScore"
+import {ExchangeSymbol} from "./resp/ExchangeSymbol"
 
 export interface DatabaseDataSource extends DataSource {
   getAllCompanies(): Promise<any[]>

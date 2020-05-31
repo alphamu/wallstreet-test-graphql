@@ -3,8 +3,8 @@ import formatDate from 'dateformat'
 import { log4db as log } from '../logger'
 import { DatabaseDataSource } from './databaseDataSource'
 import { DataSourceConfig } from 'apollo-datasource'
-import {ExchangeSymbol} from "./ExchangeSymbol"
-import {SnowflakeScore} from "./SnowflakeScore"
+import {ExchangeSymbol} from "./resp/ExchangeSymbol"
+import {SnowflakeScore} from "./resp/SnowflakeScore"
 
 const verboseSqlite3 = sqlite3.verbose()
 const sqlite3DatabaseDataSource = new verboseSqlite3.Database('./sws.sqlite3')
