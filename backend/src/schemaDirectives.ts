@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/max-classes-per-file: ["error", 5] */
 import { SchemaDirectiveVisitor } from 'graphql-tools'
 import {
   defaultFieldResolver,

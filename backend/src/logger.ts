@@ -35,13 +35,13 @@ log4js.configure({
     resolver: {
       appenders: [process.env.LOG_FORMAT || 'string'],
       level: process.env.LOG_FORMAT || 'debug',
-    }
-  }
+    },
+  },
 })
 export default log4js.getLogger()
 
-export const log4db = log4js.getLogger('db'),
-  log4index = log4js.getLogger('index'),
-  log4directives = log4js.getLogger('directives'),
-  log4typedef = log4js.getLogger('typedef'),
-  log4resolver = log4js.getLogger('resolver')
+export const log4db = log4js.getLogger('db')
+export const log4index = log4js.getLogger('index')
+export const log4directives = log4js.getLogger('directives')
+export const log4typedef = log4js.getLogger('typedef')
+export const log4resolver = log4js.getLogger('resolver')

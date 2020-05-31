@@ -110,7 +110,7 @@ export const typeDefs = gql`
     total: Int
     sentence: String
   }
-  
+
   type ExchangeSymbol {
     exchange_symbol: String
   }

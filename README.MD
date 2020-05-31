@@ -15,25 +15,38 @@ pagination for large datasets, this pages sorting and filtering client side infe
 
 ## Running
 
-In order to run the project, you will have to run and backend and client side code.
+In order to run the project, you can either build the react app and run 
+it through the backend express server (already configured),
+or you can run the react app and the backend separately.
+
+### To run everything under express:
+
+```bash
+cd client && npm install && npm run build
+cd ../backend && npm install && npm start
+```
+
+The API will run on http://localhost:5000 (react app will be there if it's been built)
+There will be a GraphQL playground on http://localhost:5000/graphql
+You can validate that the sorting and filtering is working there as well.
+
+### To run the backend and front-end separately.
 
 ```bash
 # Backend code
-cd backend
-npm install && npm start
+cd backend && npm install && npm start
 # Starts on http://localhost:5000
 # GraphQL playground on http://localhost:5000/graphql
 
 # Client side code (ReactJS)
-cd client
-npm install && npm start
+cd client && npm install && npm start
 # Starts on http://localhost:3000
 ```
 
 The client, a ReactJS app will run on http://localhost:3000
 As required you can sort and filter the data on that page.
 
-The API will run on http://localhost:5000 (nothing there, don't visit)
+The API will run on http://localhost:5000 (react app will be there if it's been built)
 There will be a GraphQL playground on http://localhost:5000/graphql
 You can validate that the sorting and filtering is working there as well.
 
