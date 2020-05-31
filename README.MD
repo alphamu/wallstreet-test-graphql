@@ -3,29 +3,31 @@
 ## Requirements
 
 - Node12
-- NPM
+- npm
+- Docker (optional)
 
 ## Notes
 
-- The backend uses Express, Apollo & graphQL.
-the client interacts with the API using Apollo graphQL client.
-There is no REST API.
-Very little process is being done on the client side, as the goal is to have
-pagination for large datasets, this pages sorting and filtering client side infeasible.
+- The backend uses Express, Apollo & GraphQL.
+the client interacts with the API using Apollo GraphQL client.
 
-- The Backend uses GraphQL using Apollo with Express. Backend tests are under the `__tests__` folder.
+- There is no REST API.
 
+- Very little processing is being done on the client side, this is mostly because if you have 
+large datasets with lots of pages, client side sorting and pagination can be problematic.
 
-- Frontend is a ReactJS app, no UI components library is used, CSS is done by hand. 
-Frontend tests using the `*.test.js`
-naming convention as is the default for react apps.
+- The backend uses GraphQL using Apollo with Express. Backend tests are under the `__tests__` folder.
+
+- Frontend is a ReactJS app, no UI components library are being used. CSS is done by hand. 
+
+- Frontend tests using the `*.test.js` naming convention as is the default for react apps.
 
 
 ## Running
 
 In order to run the project, you can either:
-- Build and run the docker container
-- build the React app and run it through the backend express server
+- Build and run the docker container (Recommended)
+- Build the React app and run it through the backend express server
 - Or, you can run the React app and the backend separately.
 
 ### To build and run in docker
@@ -192,6 +194,27 @@ in the `MockDatabaseDataSource` or you can point it to really any data source yo
 Code is already Kibana ready, the logger can print out in JSON format with an environment variable change. It's also simple 
 to configure this to send the logs over UDP or TCP if we want.
 
+## What could be improved
 
+### Backend
+
+- More GraphQL security measures should be added such as
+    - Query depth
+    - Payload size
+- GraphQL code could be abstracted better which would allow for better testing.
+- Use of `any` in the code could be removed and replaced with Typescript interfaces.
+- The query could accept more optional arguments to cater for more scenarios such as:
+    - Fetching company by id
+    - Sorting, filtering, and limits on closing price of companies (note these are straight forward to implement, the code is flexible enough)
+    
+### Frontend
+
+- Better break down of components in ReactJS.
+    - `Companies` and `Company` do too much. 
+- Explicit declaration of properties for components using `PropTypes`
+- Instead of having filters pass state to the parents, handle this through Redux.
+- Use react-hooks instead of Redux
+- Better structure for CSS (right now everything was shoved into `App.css`)
+- Use Storybook to test and maintain for low level components.
 
 
