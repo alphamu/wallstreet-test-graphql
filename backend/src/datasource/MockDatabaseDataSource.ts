@@ -2,6 +2,8 @@ import sqlite3 from 'sqlite3'
 import formatDate from 'dateformat'
 import {DatabaseDataSource} from './databaseDataSource'
 import {DataSourceConfig} from 'apollo-datasource'
+import {ExchangeSymbol} from "./ExchangeSymbol"
+import {SnowflakeScore} from "./SnowflakeScore"
 
 const verboseSqlite3 = sqlite3.verbose()
 const sqlite3DatabaseDataSource = new verboseSqlite3.Database('./sws.sqlite3')
@@ -72,34 +74,22 @@ export class MockDatabaseSource implements DatabaseDataSource {
     })
   }
 
-  getUniqueExchangeSymbols(): Promise<any[]> {
+  getUniqueExchangeSymbols(): Promise<ExchangeSymbol[]> {
     return new Promise((resolve, reject) => {
       resolve([
-        {
-          "exchange_symbol": "A"
-        },
-        {
-          "exchange_symbol": "B"
-        },
-        {
-          "exchange_symbol": "C"
-        }
+          new ExchangeSymbol("A"),
+          new ExchangeSymbol("B"),
+          new ExchangeSymbol("C"),
       ])
     })
   }
 
-  getUniqueScores(): Promise<any[]> {
+  getUniqueScores(): Promise<SnowflakeScore[]> {
     return new Promise((resolve, reject) => {
       resolve([
-          {
-            "score": "1"
-          },
-          {
-            "score": "2"
-          },
-          {
-            "score": "3"
-          }
+          new SnowflakeScore('1'),
+          new SnowflakeScore('2'),
+          new SnowflakeScore('3')
       ])
     })
   }

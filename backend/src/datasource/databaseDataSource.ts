@@ -1,4 +1,6 @@
 import { DataSource, DataSourceConfig } from 'apollo-datasource'
+import {SnowflakeScore} from "./SnowflakeScore"
+import {ExchangeSymbol} from "./ExchangeSymbol"
 
 export interface DatabaseDataSource extends DataSource {
   getAllCompanies(): Promise<any[]>
@@ -23,7 +25,7 @@ export interface DatabaseDataSource extends DataSource {
     filterByField: string,
     filterByValues: string[]
   ): Promise<any[]>
-  getUniqueExchangeSymbols(): Promise<any[]>
+  getUniqueExchangeSymbols(): Promise<ExchangeSymbol[]>
 
-  getUniqueScores(): Promise<any[]>
+  getUniqueScores(): Promise<SnowflakeScore[]>
 }

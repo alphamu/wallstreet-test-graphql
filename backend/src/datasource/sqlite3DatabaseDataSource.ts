@@ -3,6 +3,8 @@ import formatDate from 'dateformat'
 import { log4db as log } from '../logger'
 import { DatabaseDataSource } from './databaseDataSource'
 import { DataSourceConfig } from 'apollo-datasource'
+import {ExchangeSymbol} from "./ExchangeSymbol"
+import {SnowflakeScore} from "./SnowflakeScore"
 
 const verboseSqlite3 = sqlite3.verbose()
 const sqlite3DatabaseDataSource = new verboseSqlite3.Database('./sws.sqlite3')
@@ -123,12 +125,12 @@ export class Sqlite3DatabaseSource implements DatabaseDataSource {
     })
   }
 
-  getUniqueExchangeSymbols(): Promise<any[]> {
+  getUniqueExchangeSymbols(): Promise<ExchangeSymbol[]> {
     return new Promise((resolve, reject) => {
       sqlite3DatabaseDataSource.serialize(() => {
         sqlite3DatabaseDataSource.all(
           'SELECT DISTINCT(exchange_symbol) as exchange_symbol FROM swsCompany ORDER BY 1',
-          (err: any, rows: any) => {
+          (err: any, rows: ExchangeSymbol[]) => {
             if (err) reject(err)
             resolve(rows)
           }
@@ -137,7 +139,7 @@ export class Sqlite3DatabaseSource implements DatabaseDataSource {
     })
   }
 
-  getUniqueScores(): Promise<any[]> {
+  getUniqueScores(): Promise<SnowflakeScore[]> {
     return new Promise((resolve, reject) => {
       sqlite3DatabaseDataSource.serialize(() => {
         sqlite3DatabaseDataSource.all(
@@ -145,7 +147,7 @@ export class Sqlite3DatabaseSource implements DatabaseDataSource {
             'FROM swsCompany c ' +
             'INNER JOIN swsCompanyScore s ON c.id = s.company_id ' +
             'ORDER BY 1',
-          (err: any, rows: any) => {
+          (err: any, rows: SnowflakeScore[]) => {
             if (err) reject(err)
             resolve(rows)
           }
