@@ -7,11 +7,18 @@
 
 ## Notes
 
-The backend uses Express, Apollo & graphQL.
+- The backend uses Express, Apollo & graphQL.
 the client interacts with the API using Apollo graphQL client.
 There is no REST API.
 Very little process is being done on the client side, as the goal is to have
 pagination for large datasets, this pages sorting and filtering client side infeasible.
+
+- The Backend uses GraphQL using Apollo with Express. Backend tests are under the `__tests__` folder.
+
+- Frontend is a ReactJS app, no UI components library is used, CSS is done by hand. 
+Frontend tests using the `*.test.js`
+naming convention as is the default for react apps.
+
 
 ## Running
 
