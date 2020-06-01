@@ -213,7 +213,7 @@ to configure this to send the logs over UDP or TCP if we want.
     - `Companies` and `Company` do too much. 
 - Explicit declaration of properties for components using `PropTypes`
 - Instead of having filters pass state to the parents, handle this through Redux.
-- Use react-hooks instead of Redux
+- Use react-hooks instead of passing state to parent
 - Better structure for CSS (right now everything was shoved into `App.css`)
 - Use Storybook to test and maintain for low level components.
 
