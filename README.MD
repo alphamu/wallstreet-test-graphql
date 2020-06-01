@@ -26,21 +26,49 @@ large datasets with lots of pages, client side sorting and pagination can be pro
 ## Running
 
 In order to run the project, you can either:
-- Build and run the docker container (Recommended)
-- Build the React app and run it through the backend express server
+- Download the image from Docker Hub and run it (Recommended).
+- Build the docker image and run the docker container.
+- Build the React app and run it through the backend express server.
 - Or, you can run the React app and the backend separately.
+
+### Download the docker image and run the container
+
+```bash
+# Pull docker image
+docker pull alimuzaffar/wallstreet-test
+
+# Run a container mapping our port 5000 to containers port 5000 with name ali_test
+docker run -p 5000:5000 --name ali_test -d alimuzaffar/wallstreet-test
+
+# Ensure docker container is running
+docker ps
+
+# Check docker logs to make sure service is ready on http://localhost:5000
+docker logs ali_test
+```
+
+If you see output like the one shown, you should be able to visit http://localhost:5000 and see everything work:
+
+```
+[0000-00-00T00:00:00.000] [INFO] default - 🚀  Server ready at http://localhost:5000
+ Query GraphQL on http://localhost:5000/graphql
+```
+
 
 ### To build and run in docker
 
 ```bash
+# Build the image
 docker build -t <your username>/wallstreet-test .
-docker run -p 5000:5000 -d <your username>/wallstreet-test
 
-# Ensure docker container is running, if it is, you'll need the CONTAINER ID
+# Run a container mapping our port 5000 to containers port 5000 with name ali_test
+docker run -p 5000:5000 --name ali_test -d <your username>/wallstreet-test
+
+# Ensure docker container is running
 docker ps
 
 # Check docker logs to make sure service is ready on http://localhost:5000
-docker logs <container id>
+docker logs ali_test
 ```
 
 If you see output like the one shown, you should be able to visit http://localhost:5000 and see everything work:
@@ -69,12 +97,12 @@ You can validate that the sorting and filtering is working there as well.
 
 ```bash
 # Backend code
-cd backend && npm install && npm start
+cd backend && npm clean-install && npm start
 # Starts on http://localhost:5000
 # GraphQL playground on http://localhost:5000/graphql
 
 # Client side code (ReactJS)
-cd client && npm install && npm start
+cd client && npm clean-install && npm start
 # Starts on http://localhost:3000
 ```
 
