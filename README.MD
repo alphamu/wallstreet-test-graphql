@@ -37,8 +37,9 @@ In order to run the project, you can either:
 # Pull docker image
 docker pull alimuzaffar/wallstreet-test
 
-# Run a container mapping our port 5000 to containers port 5000 with name ali_test
-docker run -p 5000:5000 --name ali_test -d alimuzaffar/wallstreet-test
+# Run a container mapping our port 5000 to containers port 5000 with name 'ali_test'
+# Remove container on exit
+docker run --rm -p 5000:5000 --name ali_test -d alimuzaffar/wallstreet-test
 
 # Ensure docker container is running
 docker ps
@@ -62,7 +63,8 @@ If you see output like the one shown, you should be able to visit http://localho
 docker build -t <your username>/wallstreet-test .
 
 # Run a container mapping our port 5000 to containers port 5000 with name ali_test
-docker run -p 5000:5000 --name ali_test -d <your username>/wallstreet-test
+# Remove container on exit
+docker run --rm -p 5000:5000 --name ali_test -d <your username>/wallstreet-test
 
 # Ensure docker container is running
 docker ps
@@ -79,7 +81,7 @@ If you see output like the one shown, you should be able to visit http://localho
 
 When you're done, you probably want to stop the docker container:
 ```bash
-docker stop <container id>
+docker stop ali_test
 ```
 
 ### To run everything under express:
