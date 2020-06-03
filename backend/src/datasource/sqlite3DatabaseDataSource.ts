@@ -1,13 +1,13 @@
-import sqlite3 from 'sqlite3'
-import formatDate from 'dateformat'
-import { log4db as log } from '../logger'
-import { DatabaseDataSource } from './databaseDataSource'
-import { DataSourceConfig } from 'apollo-datasource'
+import sqlite3 from "sqlite3"
+import formatDate from "dateformat"
+import { log4db as log } from "../logger"
+import { DatabaseDataSource } from "./databaseDataSource"
+import { DataSourceConfig } from "apollo-datasource"
 import {ExchangeSymbol} from "./resp/ExchangeSymbol"
 import {SnowflakeScore} from "./resp/SnowflakeScore"
 
 const verboseSqlite3 = sqlite3.verbose()
-const sqlite3DatabaseDataSource = new verboseSqlite3.Database('./sws.sqlite3')
+const sqlite3DatabaseDataSource = new verboseSqlite3.Database("./sws.sqlite3")
 
 export class Sqlite3DatabaseSource implements DatabaseDataSource {
   initialize(config: DataSourceConfig<any>): void | Promise<void> {
@@ -18,7 +18,7 @@ export class Sqlite3DatabaseSource implements DatabaseDataSource {
     return new Promise((resolve, reject) => {
       sqlite3DatabaseDataSource.serialize(() => {
         sqlite3DatabaseDataSource.all(
-          'SELECT * FROM swsCompany',
+          "SELECT * FROM swsCompany",
           (err: any, rows: any) => {
             if (err) reject(err)
             resolve(rows)
@@ -38,7 +38,7 @@ export class Sqlite3DatabaseSource implements DatabaseDataSource {
       sqlite3DatabaseDataSource.serialize(() => {
         const stmt = sqlite3DatabaseDataSource.prepare(
           `SELECT * FROM ${table} WHERE ${column} = ? ORDER BY ${
-            orderBy || '1'
+            orderBy || "1"
           }`
         )
         stmt.all(value, (err: any, rows: any) => {
@@ -51,15 +51,15 @@ export class Sqlite3DatabaseSource implements DatabaseDataSource {
   }
 
   getCompaniesSortedAndFiltered(
-    sortBy = '1',
-    sortDirection = 'DESC',
+    sortBy = "1",
+    sortDirection = "DESC",
     filterByField: string,
     filterByValues: string[]
   ): Promise<any[]> {
     return new Promise((resolve, reject) => {
       const ago90 = new Date()
       ago90.setDate(ago90.getDate() - 90)
-      const ago90Str = formatDate(ago90, 'yyyy-mm-dd')
+      const ago90Str = formatDate(ago90, "yyyy-mm-dd")
       sqlite3DatabaseDataSource.serialize(() => {
         const sql = `
                     SELECT
@@ -75,24 +75,24 @@ export class Sqlite3DatabaseSource implements DatabaseDataSource {
                         LEFT OUTER JOIN swsCompanyPriceClose p ON c.id = p.company_id
                     WHERE
                         p.date_created > '${
-                          sortBy === 'volatile' ? ago90Str : '1901-01-01'
+                          sortBy === "volatile" ? ago90Str : "1901-01-01"
                         }'
                         ${
                           filterByField
                             ? `AND ${filterByField} IN ('${filterByValues.join(
                                 "','"
                               )}')`
-                            : ''
+                            : ""
                         }
                     GROUP BY
                         c.id
                     ORDER BY
                         ${
-                          sortBy === 'volatile'
-                            ? '5'
-                            : sortBy === 'score'
-                            ? '2'
-                            : '1'
+                          sortBy === "volatile"
+                            ? "5"
+                            : sortBy === "score"
+                            ? "2"
+                            : "1"
                         } ${sortDirection}
                 `
         sqlite3DatabaseDataSource.all(sql, (err: any, rows: any) => {
@@ -113,7 +113,7 @@ export class Sqlite3DatabaseSource implements DatabaseDataSource {
       sqlite3DatabaseDataSource.serialize(() => {
         const stmt = sqlite3DatabaseDataSource.prepare(
           `SELECT * FROM ${table} WHERE ${column} = ? ORDER BY ${
-            orderBy || '1'
+            orderBy || "1"
           } LIMIT 0,1`
         )
         stmt.each(value, (err: any, row: any) => {
@@ -129,7 +129,7 @@ export class Sqlite3DatabaseSource implements DatabaseDataSource {
     return new Promise((resolve, reject) => {
       sqlite3DatabaseDataSource.serialize(() => {
         sqlite3DatabaseDataSource.all(
-          'SELECT DISTINCT(exchange_symbol) as exchange_symbol FROM swsCompany ORDER BY 1',
+          "SELECT DISTINCT(exchange_symbol) as exchange_symbol FROM swsCompany ORDER BY 1",
           (err: any, rows: ExchangeSymbol[]) => {
             if (err) reject(err)
             resolve(rows)
@@ -143,10 +143,10 @@ export class Sqlite3DatabaseSource implements DatabaseDataSource {
     return new Promise((resolve, reject) => {
       sqlite3DatabaseDataSource.serialize(() => {
         sqlite3DatabaseDataSource.all(
-          'SELECT DISTINCT(s.total) AS score ' +
-            'FROM swsCompany c ' +
-            'INNER JOIN swsCompanyScore s ON c.id = s.company_id ' +
-            'ORDER BY 1',
+          "SELECT DISTINCT(s.total) AS score " +
+            "FROM swsCompany c " +
+            "INNER JOIN swsCompanyScore s ON c.id = s.company_id " +
+            "ORDER BY 1",
           (err: any, rows: SnowflakeScore[]) => {
             if (err) reject(err)
             resolve(rows)

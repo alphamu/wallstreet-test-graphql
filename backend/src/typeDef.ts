@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express'
+import { gql } from "apollo-server-express"
 
 export const typeDefs = gql`
   directive @date(defaultFormat: String = "mmmm d, yyyy") on FIELD_DEFINITION

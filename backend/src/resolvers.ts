@@ -9,9 +9,9 @@ export default {
       return context.dataSources.db.getUniqueExchangeSymbols()
     },
     companies: (_source: any, args: any, context: any) => {
-      const { sortBy, sortDirection, filterByField, filterByValues } = args
       const companyArgs = new CompaniesArgs(args)
       companyArgs.validate()
+      const { sortBy, sortDirection, filterByField, filterByValues } = companyArgs
       return context.dataSources.db.getCompaniesSortedAndFiltered(
         sortBy,
         sortDirection,

@@ -1,12 +1,12 @@
-import sqlite3 from 'sqlite3'
-import formatDate from 'dateformat'
-import {DatabaseDataSource} from './databaseDataSource'
-import {DataSourceConfig} from 'apollo-datasource'
+import sqlite3 from "sqlite3"
+import formatDate from "dateformat"
+import {DatabaseDataSource} from "./databaseDataSource"
+import {DataSourceConfig} from "apollo-datasource"
 import {ExchangeSymbol} from "./resp/ExchangeSymbol"
 import {SnowflakeScore} from "./resp/SnowflakeScore"
 
 const verboseSqlite3 = sqlite3.verbose()
-const sqlite3DatabaseDataSource = new verboseSqlite3.Database('./sws.sqlite3')
+const sqlite3DatabaseDataSource = new verboseSqlite3.Database("./sws.sqlite3")
 
 export class MockDatabaseSource implements DatabaseDataSource {
   initialize(config: DataSourceConfig<any>): void | Promise<void> {
@@ -32,8 +32,8 @@ export class MockDatabaseSource implements DatabaseDataSource {
   }
 
   getCompaniesSortedAndFiltered(
-    sortBy = '1',
-    sortDirection = 'DESC',
+    sortBy = "1",
+    sortDirection = "DESC",
     filterByField: string,
     filterByValues: string[]
   ): Promise<any[]> {
@@ -87,9 +87,9 @@ export class MockDatabaseSource implements DatabaseDataSource {
   getUniqueScores(): Promise<SnowflakeScore[]> {
     return new Promise((resolve, reject) => {
       resolve([
-          new SnowflakeScore('1'),
-          new SnowflakeScore('2'),
-          new SnowflakeScore('3')
+          new SnowflakeScore("1"),
+          new SnowflakeScore("2"),
+          new SnowflakeScore("3")
       ])
     })
   }

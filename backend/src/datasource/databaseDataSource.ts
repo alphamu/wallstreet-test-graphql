@@ -1,4 +1,4 @@
-import { DataSource, DataSourceConfig } from 'apollo-datasource'
+import { DataSource, DataSourceConfig } from "apollo-datasource"
 import {SnowflakeScore} from "./resp/SnowflakeScore"
 import {ExchangeSymbol} from "./resp/ExchangeSymbol"
 

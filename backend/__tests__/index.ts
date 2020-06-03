@@ -1,10 +1,10 @@
-import {ApolloServer} from 'apollo-server'
-import {typeDefs} from '../src/typeDef'
+import {ApolloServer} from "apollo-server"
+import {typeDefs} from "../src/typeDef"
 import resolvers from "../src/resolvers"
 import logger from "../src/logger"
 import {MockDatabaseSource} from "../src/datasource/MockDatabaseDataSource"
 
-const {createTestClient} = require('apollo-server-testing')
+const {createTestClient} = require("apollo-server-testing")
 
 let server:ApolloServer
 
@@ -20,7 +20,7 @@ afterAll(() => {
     return server.stop()
 })
 
-it('should be 2 companies', async () => {
+it("should be 2 companies", async () => {
     const {query} = createTestClient(server)
     const res = await query({query: COMPANIES})
     expect(res.data).toBeDefined()
@@ -28,15 +28,15 @@ it('should be 2 companies', async () => {
     expect(res.data.companies.length).toBe(2)
     // validate values
     // validate ids
-    expect(res.data.companies[0].company_id).toBe('1')
-    expect(res.data.companies[1].company_id).toBe('2')
+    expect(res.data.companies[0].company_id).toBe("1")
+    expect(res.data.companies[1].company_id).toBe("2")
     // validate names
-    expect(res.data.companies[0].name).toBe('CompanyA')
-    expect(res.data.companies[1].name).toBe('CompanyB')
+    expect(res.data.companies[0].name).toBe("CompanyA")
+    expect(res.data.companies[1].name).toBe("CompanyB")
 
 })
 
-it('should be 3 scores', async () => {
+it("should be 3 scores", async () => {
     const {query} = createTestClient(server)
     const res = await query({query: SCORES})
     expect(res.data).toBeDefined()
@@ -48,7 +48,7 @@ it('should be 3 scores', async () => {
     }
 })
 
-it('should be 3 exchanges', async () => {
+it("should be 3 exchanges", async () => {
     const {query} = createTestClient(server)
     const res = await query({query: EXCHANGE})
     expect(res.data).toBeDefined()
@@ -60,7 +60,7 @@ it('should be 3 exchanges', async () => {
     }
 })
 
-it('combined request are all present', async () => {
+it("combined request are all present", async () => {
     const {query} = createTestClient(server)
     const res = await query({query: ALL})
     expect(res.data).toBeDefined()
@@ -75,50 +75,50 @@ it('combined request are all present', async () => {
     expect(res.data.companies.length).toBe(2)
 })
 
-const ALL = '' +
-    '{' +
-    '  unique_scores {' +
-    '    score' +
-    '  }' +
-    '  exchange_symbols {' +
-    '    exchange_symbol' +
-    '  }' +
-    '  companies {' +
-    '    company_id' +
-    '    name' +
-    '    score' +
-    '    min_price' +
-    '    max_price' +
-    '    volatile_score' +
-    '    exchange_symbol' +
-    '    unique_symbol' +
-    '  }' +
-    '}'
+const ALL = "" +
+    "{" +
+    "  unique_scores {" +
+    "    score" +
+    "  }" +
+    "  exchange_symbols {" +
+    "    exchange_symbol" +
+    "  }" +
+    "  companies {" +
+    "    company_id" +
+    "    name" +
+    "    score" +
+    "    min_price" +
+    "    max_price" +
+    "    volatile_score" +
+    "    exchange_symbol" +
+    "    unique_symbol" +
+    "  }" +
+    "}"
 
-const COMPANIES = '' +
-    '{' +
-    '  companies {' +
-    '    company_id' +
-    '    name' +
-    '    score' +
-    '    min_price' +
-    '    max_price' +
-    '    volatile_score' +
-    '    exchange_symbol' +
-    '    unique_symbol' +
-    '  }' +
-    '}'
+const COMPANIES = "" +
+    "{" +
+    "  companies {" +
+    "    company_id" +
+    "    name" +
+    "    score" +
+    "    min_price" +
+    "    max_price" +
+    "    volatile_score" +
+    "    exchange_symbol" +
+    "    unique_symbol" +
+    "  }" +
+    "}"
 
-const SCORES = '' +
-    '{' +
-    '  unique_scores {' +
-    '   score' +
-    '  }' +
-    '}'
+const SCORES = "" +
+    "{" +
+    "  unique_scores {" +
+    "   score" +
+    "  }" +
+    "}"
 
-const EXCHANGE = '' +
-    '{' +
-    '  exchange_symbols {' +
-    '    exchange_symbol' +
-    '   }' +
-    '}'
+const EXCHANGE = "" +
+    "{" +
+    "  exchange_symbols {" +
+    "    exchange_symbol" +
+    "   }" +
+    "}"

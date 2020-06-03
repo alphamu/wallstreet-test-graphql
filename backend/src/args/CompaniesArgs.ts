@@ -1,16 +1,16 @@
 enum SortBy {
-    volatile = 'volatile',
-    score = 'score'
+    volatile = "volatile",
+    score = "score"
 }
 
 enum SortDirection {
-    asc = 'asc',
-    desc = 'desc'
+    asc = "asc",
+    desc = "desc"
 }
 
 enum FilterField {
-    total = 'total',
-    exchange_symbol = 'exchange_symbol'
+    total = "total",
+    exchange_symbol = "exchange_symbol"
 }
 
 export interface IArgs {
@@ -31,7 +31,7 @@ export class CompaniesArgs implements IArgs {
     }
 
     validate(): void {
-        let errorMessage = ''
+        let errorMessage = ""
 
         if (stringDefined(this.sortBy) || stringDefined(this.sortDirection)) {
             errorMessage += this.validateSort()
@@ -53,7 +53,7 @@ export class CompaniesArgs implements IArgs {
         if (!Object.values(SortDirection).includes(this.sortDirection)) {
             return `Valid values for sortDirection are: ${Object.values(SortDirection)}\n`
         }
-        return ''
+        return ""
     }
 
     validateFilter(): string {
@@ -65,7 +65,7 @@ export class CompaniesArgs implements IArgs {
             return `filterByValues cannot be empty\n`
         }
 
-        return ''
+        return ""
 
     }
 }

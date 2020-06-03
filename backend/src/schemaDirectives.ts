@@ -1,12 +1,12 @@
-import { SchemaDirectiveVisitor } from 'graphql-tools'
+import { SchemaDirectiveVisitor } from "graphql-tools"
 import {
   defaultFieldResolver,
   GraphQLField,
   GraphQLObjectType,
   GraphQLString,
-} from 'graphql'
-import formatDate from 'dateformat'
-import { log4directives as log } from './logger'
+} from "graphql"
+import formatDate from "dateformat"
+import { log4directives as log } from "./logger"
 
 class DateFormatDirective extends SchemaDirectiveVisitor {
   visitFieldDefinition(field: GraphQLField<any, any>) {
@@ -18,7 +18,7 @@ class DateFormatDirective extends SchemaDirectiveVisitor {
       defaultValue: undefined,
       description: undefined,
       extensions: undefined,
-      name: 'format',
+      name: "format",
       type: GraphQLString,
     })
 
@@ -61,7 +61,7 @@ class FilteredAndSortedDatabaseDirective extends SchemaDirectiveVisitor {
   visitFieldDefinition(field: GraphQLField<any, any>) {
     field.resolve = async (source, params, context) => {
       log.debug(
-        'FilteredAndSortedDatabaseDirective',
+        "FilteredAndSortedDatabaseDirective",
         this.args.sortedBy,
         this.args.sortDirection,
         this.args.filterByField,
